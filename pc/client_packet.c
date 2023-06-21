@@ -24,11 +24,3 @@ nota* client_receive_packet(int fd, nota* n){
     return n;
 
 }
-
-
-void client_print_packet(nota* n){
-    
-    printf("stampo nota: pin = %d, tipo_evento: %d\n", n->pin, n->tipo_evento);
-
-}
-

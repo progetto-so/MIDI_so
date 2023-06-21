@@ -1,3 +1,5 @@
+#include "uart.h"
+
 #include <util/delay.h>
 #include <stdio.h>
 #include <stdint.h>
@@ -6,8 +8,6 @@
 #include <avr/interrupt.h>
 #include <avr/sfr_defs.h>
 
-#include "nota.h"
-#include "uart.h"
 
 #define PIN_MASK 0xF0 // maschera per i 4 pin (da PB4 a PB7....da PIN 10 a PIN 13)
 
@@ -38,7 +38,7 @@ int main(void)
 		while (!int_occurred);
 		// we reset the flag;
 		int_occurred = 0;
-		for (uint8_t x = 4; x < 7; x++)
+		for (uint8_t x = 4; x < 8; x++)
 		{
 			if (bit_is_set(PINB, x))
 			{

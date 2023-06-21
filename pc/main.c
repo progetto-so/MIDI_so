@@ -1,5 +1,4 @@
 #include "client_packet.h"
-#include "nota.h"
 
 #include <stdio.h>
 #include <sys/types.h>
@@ -10,7 +9,6 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include <pthread.h>
 #include <stdint.h>
 
 #include <signal.h>
@@ -36,7 +34,6 @@
  * ================================================== */
 
 int fd;
-// pthread_t reader;
 int connected = 0;
 
 int serial_set_interface_attribs(int fd, int speed, int parity)
@@ -212,17 +209,25 @@ void reader_work(nota *n, short *buffer)
 
         n = client_receive_packet(fd, n);
 
-        if ((n->tipo_evento) == 0)
+        if ((n->pin) == 13)
         {
-            suona(n, buffer);
+            printf("Hai premuto il pulsante di arresto!\n");
+            break;
         }
-        else if ((n->tipo_evento) == 1)
+        else
         {
-            stop();
+            if ((n->tipo_evento) == 0)
+            {
+                suona(n, buffer);
+            }
+            else if ((n->tipo_evento) == 1)
+            {
+                stop();
+            }
         }
 
         printf("stampo nota: pin = %d, tipo_evento: %d\n", n->pin, n->tipo_evento);
-        // client_print_packet(n);
+
     }
 
     return;

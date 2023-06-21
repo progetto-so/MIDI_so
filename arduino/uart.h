@@ -1,14 +1,10 @@
-#pragma once
-
-#include "nota.h"
+#include "../nota.h"
 
 #include <stdint.h>
 #include <string.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <avr/iom2560.h>
-
-
 
 #define F_CPU 16000000UL
 #define BAUD 57600

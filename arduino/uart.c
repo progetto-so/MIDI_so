@@ -1,5 +1,4 @@
 #include "uart.h"
-#include "nota.h"
 
 
 uint8_t data_to_send[2];
