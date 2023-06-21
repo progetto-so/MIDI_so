@@ -45,13 +45,30 @@ int serial_set_interface_attribs(int fd, int speed, int parity)
         perror("Error from tcgetattr");
         return -1;
     }
-    
-    speed = B57600;
+    switch (speed)
+    {
+    case 9600:
+        speed = B9600;
+        break;
+    case 19200:
+        speed = B19200;
+        break;
+    case 57600:
+        speed = B57600;
+        break;
+    case 115200:
+        speed = B115200;
+        break;
+    default:
+        printf("cannot set baudrate %d\n", speed);
+        return -1;
+    }
 
     cfsetospeed(&tty, speed);
     cfsetispeed(&tty, speed);
     cfmakeraw(&tty);
 
+    tty.c_cflag &= ~(PARENB | PARODD);
     tty.c_cflag |= parity;
     tty.c_cflag = (tty.c_cflag & ~CSIZE) | CS8;
 
