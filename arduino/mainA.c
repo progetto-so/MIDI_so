@@ -12,13 +12,11 @@
 #define PIN_MASK 0xF0 // maschera per i 4 pin (da PB4 a PB7....da PIN 10 a PIN 13)
 
 volatile uint8_t int_occurred = 0;
-volatile uint16_t int_count = 0;
 
 // interrupt routine for position PCINT0
 ISR(PCINT0_vect)
 {
 	int_occurred = 1;
-	int_count++;
 }
 
 int main(void)
